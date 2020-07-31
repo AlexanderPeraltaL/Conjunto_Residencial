@@ -1,29 +1,51 @@
 document.getElementById("btn-guardar-inmueble").addEventListener('click', (e) =>{
-	if(document.getElementById("frm-mensualidad").reportValidity()){
-        var nombre, documento, genero, fecha_nac, nombre_almacenado, documento_almacenado,
-            genero_almacenado, fecha_nac_almacenada;
-        nombre = document.getElementById("nombre-propietario");
-        localStorage.setItem("nombre-propietario", nombre.value);
-        nombre_almacenado = localStorage.getItem("nombre-propietario");
+    let nombre_almacenado, documento_almacenado,  genero_almacenado, fecha_nac_almacenada, mt_inmueble_almacenado, tipo_inmuebl_almacenado, num_habitantes_almacenado, fech_men_inmueble_almacenado; 
+    
 
-        documento = document.getElementById("doc-propietario");
-        localStorage.setItem("doc-propietario", documento.value);
-        documento_almacenado = localStorage.getItem("doc-propietario");
-
-        genero = document.getElementById("genero-propietario");
-        localStorage.setItem("genero-propietario", genero.value);
-        genero_almacenado = localStorage.setItem("genero-propietario");
-
-
-        fecha_nac = document.getElementById("fecha-nac-propietario");
-        localStorage.setItem("fecha-nac-propietario", fecha_nac.value);
-        fecha_nac_almacenada = localStorage.setItem("fecha-nac-propietario");
-
-
-        console.log(nombre_almacenado, documento_almacenado, genero_almacena, fecha_nac_almacenada);        
-    }else{
-        //alert("Error de validación de campos.")
+    let inmueble = {
+         datos_propietario : {
+             nombre : null,
+             docuemnto : null,
+             genero : null,
+             fech_nac: null
+         },
+         datos_inmueble : {
+             metros_cuadrados : null,
+             tipo : null,
+             numero_habitantes : 0,
+             fech_mensualidad : null,
+           },
     }
+
+        if(document.getElementById("frm-mensualidad").reportValidity()){
+
+            inmueble.datos_propietario.nombre = document.getElementById("nombre-propietario").value; 
+            inmueble.datos_propietario.genero = document.getElementById("genero-propietario").value;
+            inmueble.datos_propietario.fech_nac = document.getElementById("fecha-nac-propietario").value;
+            inmueble.datos_propietario.docuemnto = document.getElementById("doc-propietario").value;
+
+            inmueble.datos_propietario.metros_cuadrados = document.getElementById("metros-cuadrados").value;
+            inmueble.datos_propietario.numero_habitantes = document.getElementById("numero-habitantes").value;
+            inmueble.datos_propietario.fech_mensualidad = document.getElementById("fecha-mensualidad").value;
+
+            if(document.getElementById("tipo_apartamento").checked){
+                inmueble.datos_propietario.tipo = document.getElementById("tipo_apartamento").value;
+
+            }
+            else{
+                inmueble.datos_propietario.tipo = document.getElementById("tipo_casa").value;
+            }
+
+
+    }else{
+        alert("Error de validación de campos.")
+    }
+
+
+    console.log (inmueble)
+
+
+
 }
 );
 
